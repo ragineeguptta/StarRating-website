@@ -1,6 +1,10 @@
 ﻿@model StarRating.ViewModel.ArticleCommentViewModel
+
 <dl class="dl-horizontal">
-    <dt>Comment</dt>
+    <br />
+    <br />
+    <br />
+    <dt style="font-size:20px;font-weight:bold;">Comment</dt>
     <dd>
         <div class="commentBox">
             @using (Html.BeginForm("Add", "ArticleComments", FormMethod.Post, new { onsubmit = "return SubmitComment()" }))
@@ -8,13 +12,13 @@
                 @Html.AntiForgeryToken()
                 <div class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-md-4 custom-control-label">
-                            Your rating <span style="font-weight:normal;">(1 star is bad, 5 star is good)</span>
-                        </label>
+                        @*<label class="col-md-4 custom-control-label">
+                                Your rating <span style="font-weight:normal;">(1 star is bad, 5 star is good)</span>
+                            </label>*@
                         <div class="col-md-7">
                             <div onmouseout="CRateSelected()">
                                 <span class="starFade" id="Rate1" onclick="CRate(1)" onmouseover="CRateOver(1)" onmouseout="CRateOut(1)"></span>
-                                <span class="starFade" id="Rate1" onclick="CRate(2)" onmouseover="CRateOver(2)" onmouseout="CRateOut(2)"></span>
+                                <span class="starFade" id="Rate2" onclick="CRate(2)" onmouseover="CRateOver(2)" onmouseout="CRateOut(2)"></span>
                                 <span class="starFade" id="Rate3" onclick="CRate(3)" onmouseover="CRateOver(3)" onmouseout="CRateOut(3)"></span>
                                 <span class="starFade" id="Rate4" onclick="CRate(4)" onmouseover="CRateOver(4)" onmouseout="CRateOut(4)"></span>
                                 <span class="starFade" id="Rate5" onclick="CRate(5)" onmouseover="CRateOver(5)" onmouseout="CRateOut(5)"></span>
@@ -30,7 +34,7 @@
                         <div class="col-md-12">
                             <input type="hidden" asp-for="ArticlesId" />
                             <input type="hidden" name="Rating" id="Rating" value="0" />
-                            <input type="submit" id="btnRegister" name="btnRegister" value="Submit Comment" class="btn btn-primary" />
+                            <input type="submit" id="btnRegister" name="btnRegister" value="Submit" class="btn btn-success" />
                         </div>
                     </div>
                 </div>
@@ -39,43 +43,45 @@
     </dd>
 
 </dl>
-<script>
-    function SubmitComment() {
-        if ($("#Rating").val() == "0"){
-            alert("Plese rate this service provider.");
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
 
-    function CRate(r) {
-        $("#Rating").val(r);
-        for (var i = 1; i <= r; i++) {
-            $("#Rate" + i).attr('class', 'starGlow');
-        }
-        for (var i = 1; i <= 5; i++) {
-            $("#Rate" + i).attr('class', 'starFade');
-        }
-    }
 
-    function CRateOver(r) {
-        for (var i = 1; i <= r; i++) {
-            $("#Rate" + 1).attr('class', 'starGlow');
+    <script>
+        function SubmitComment() {
+            if ($("#Rating").val() == "0") {
+                alert("Plese rate this service provider.");
+                return false;
+            }
+            else {
+                return true;
+            }
         }
-    }
 
-    function CRateOut(r) {
-        for (var i = 1; i <= r; i++) {
-            $("#Rate" + 1).attr('class', 'starFade');
+        function CRate(r) {
+            $("#Rating").val(r);
+            for (var i = 1; i <= r; i++) {
+                $("#Rate" + i).attr('class', 'starGlow');
+            }
+            for (var i = 1; i <= 5; i++) {
+                $("#Rate" + i).attr('class', 'starFade');
+            }
         }
-    }
 
-    function CRateSelected(r) {
-        var setRating = $("#Rating").val();
-        for (var i = 1; i <= setRating; i++) {
-            $("#Rate" + 1).attr('class', 'starGlow');
+        function CRateOver(r) {
+            for (var i = 1; i <= r; i++) {
+                $("#Rate" + 1).attr('class', 'starGlow');
+            }
         }
-    }
-</script>
+
+        function CRateOut(r) {
+            for (var i = 1; i <= r; i++) {
+                $("#Rate" + 1).attr('class', 'starFade');
+            }
+        }
+
+        function CRateSelected(r) {
+            var setRating = $("#Rating").val();
+            for (var i = 1; i <= setRating; i++) {
+                $("#Rate" + 1).attr('class', 'starGlow');
+            }
+        }
+    </script>
