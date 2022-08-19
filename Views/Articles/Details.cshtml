@@ -66,7 +66,8 @@
 
 
 
-    <script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
     function SCRate() {
         for (var i = 1; i <= @totalRating; i++) {
             $("#sRate" + i).attr('class', 'starGlowN');
@@ -75,4 +76,4 @@
     $(function(){
         SCRate();
     });
-    </script>
+</script>
